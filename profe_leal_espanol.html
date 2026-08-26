@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Profe Leal Español | Spanish 1 Learning Hub</title>
+<style>
+  :root{
+    --ink:#20313c;
+    --muted:#66747d;
+    --cream:#fffaf0;
+    --paper:#ffffff;
+    --coral:#f06c5b;
+    --gold:#f4b942;
+    --teal:#2f8f83;
+    --blue:#4d73be;
+    --lav:#9c78c4;
+    --green:#6ca96b;
+    --line:#eadfce;
+    --shadow:0 14px 35px rgba(48,54,61,.10);
+    --radius:24px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 0% 0%, #fff1dc 0 18%, transparent 19%),
+      radial-gradient(circle at 100% 12%, #e9f4f1 0 17%, transparent 18%),
+      #f7f4ee;
+  }
+  a{color:inherit;text-decoration:none}
+  button,input{font:inherit}
+  .wrap{width:min(1180px,92vw);margin:auto}
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(15px);
+    background:rgba(255,250,240,.88);
+    border-bottom:1px solid rgba(234,223,206,.9);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:20px}
+  .brand{font-weight:900;letter-spacing:-.03em;font-size:1.15rem}
+  .brand span{color:var(--coral)}
+  .navlinks{display:flex;gap:9px;flex-wrap:wrap}
+  .navlinks a{padding:9px 12px;border-radius:999px;font-size:.92rem;color:#43525b}
+  .navlinks a:hover{background:#fff}
+  .hero{
+    padding:72px 0 40px;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center
+  }
+  .eyebrow{
+    display:inline-flex;gap:8px;align-items:center;
+    background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:999px;
+    font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.09em
+  }
+  h1{font-size:clamp(3rem,7vw,6.7rem);line-height:.88;letter-spacing:-.065em;margin:18px 0}
+  h1 em{font-style:normal;color:var(--teal)}
+  .hero p{font-size:1.15rem;line-height:1.7;color:var(--muted);max-width:700px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+  .btn{
+    border:none;border-radius:14px;padding:13px 18px;font-weight:850;cursor:pointer;
+    transition:.18s transform,.18s box-shadow;display:inline-flex;align-items:center;gap:8px
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .primary{background:var(--ink);color:white;box-shadow:0 8px 22px rgba(32,49,60,.22)}
+  .secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .hero-card{
+    background:linear-gradient(145deg,#243a46,#3b5967);
+    color:#fff;border-radius:34px;padding:28px;box-shadow:var(--shadow);
+    min-height:360px;position:relative;overflow:hidden
+  }
+  .hero-card:after{
+    content:"¡Hola!";position:absolute;right:-10px;bottom:-22px;
+    font-size:7.5rem;font-weight:950;opacity:.08;transform:rotate(-7deg)
+  }
+  .hero-card small{opacity:.75;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+  .hero-card h2{font-size:2.4rem;line-height:1.05;margin:12px 0 10px}
+  .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+  .mini{
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);
+    border-radius:17px;padding:16px
+  }
+  .mini b{display:block;font-size:1.45rem}
+  section{padding:44px 0}
+  .section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:20px}
+  .section-head h2{font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.045em;margin:0}
+  .section-head p{max-width:560px;color:var(--muted);line-height:1.6;margin:0}
+  .search{
+    width:100%;padding:15px 17px;border:1px solid var(--line);border-radius:16px;background:#fff;
+    outline:none;margin-bottom:18px;box-shadow:0 4px 15px rgba(70,65,54,.05)
+  }
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;box-shadow:0 9px 25px rgba(65,61,54,.05);transition:.18s transform,.18s box-shadow
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .icon{
+    width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#fff;
+    font-weight:950;font-size:1.1rem;margin-bottom:15px
+  }
+  .card h3{font-size:1.35rem;margin:0 0 8px}
+  .card p{color:var(--muted);line-height:1.55;min-height:50px}
+  .tags{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+  .tag{font-size:.76rem;font-weight:800;background:#f6f2eb;padding:6px 9px;border-radius:999px}
+  .card button{margin-top:4px}
+  .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .practice{
+    background:#fff;border-radius:28px;padding:25px;border:1px solid var(--line);box-shadow:var(--shadow)
+  }
+  .flashcard{
+    min-height:235px;border-radius:22px;background:linear-gradient(145deg,#fff8e6,#fff);
+    border:1px solid #f0dfbd;display:grid;place-items:center;text-align:center;padding:28px;cursor:pointer;
+    user-select:none
+  }
+  .flashcard .big{font-size:2.2rem;font-weight:950;letter-spacing:-.03em}
+  .flashcard .hint{color:var(--muted);margin-top:8px}
+  .flash-actions{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+  .quiz-q{font-size:1.25rem;font-weight:850;margin:12px 0 16px}
+  .options{display:grid;gap:10px}
+  .option{
+    width:100%;text-align:left;background:#faf8f3;border:1px solid var(--line);
+    padding:12px 14px;border-radius:13px;cursor:pointer;font-weight:700
+  }
+  .option:hover{background:#fff}
+  .option.correct{background:#e7f5e8;border-color:#87bf8c}
+  .option.wrong{background:#fde9e6;border-color:#eaa297}
+  .feedback{min-height:28px;margin-top:12px;font-weight:800}
+  .resource-strip{
+    background:var(--ink);color:#fff;border-radius:30px;padding:30px;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center
+  }
+  .resource-strip p{color:#c8d3d9;line-height:1.6}
+  .teacher-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:20px}
+  .teacher-box ul{margin:8px 0 0;padding-left:20px;line-height:1.8}
+  footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:.92rem}
+  .pill-row{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{
+    border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;cursor:pointer;font-weight:800
+  }
+  .pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .hidden{display:none!important}
+  @media(max-width:900px){
+    .hero,.resource-strip,.practice-grid{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr 1fr}
+    .navlinks{display:none}
+    h1{font-size:clamp(3.2rem,16vw,5.6rem)}
+  }
+  @media(max-width:620px){
+    .cards{grid-template-columns:1fr}
+    .hero{padding-top:45px}
+    .section-head{display:block}.section-head p{margin-top:10px}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#home">Profe Leal <span>Español</span></a>
+      <div class="navlinks">
+        <a href="#units">Unidades</a>
+        <a href="#practice">Práctica</a>
+        <a href="#skills">Destrezas</a>
+        <a href="#resources">Recursos</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="home">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Spanish 1 • Learn • Practice • Grow</div>
+      <h1>¡Vamos a <em>hablar!</em></h1>
+      <p>A friendly Spanish-learning hub made for beginners. Review vocabulary, hear pronunciation, practice grammar, and challenge yourself with quick activities.</p>
+      <div class="cta">
+        <a class="btn primary" href="#units">Start learning →</a>
+        <a class="btn secondary" href="#practice">Quick practice</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <small>Today’s goal</small>
+      <h2>Use Spanish with confidence — little by little.</h2>
+      <p>Choose a unit, practice for a few minutes, then say something out loud. Progress beats perfection.</p>
+      <div class="mini-grid">
+        <div class="mini"><b>12</b><span>Starter units</span></div>
+        <div class="mini"><b>4</b><span>Core skills</span></div>
+        <div class="mini"><b>∞</b><span>Practice chances</span></div>
+        <div class="mini"><b>1</b><span>Goal: communicate</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="units">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>Choose your unit</h2></div>
+        <p>Use the search or filters to find exactly what you need. These starter units can be expanded with your own Google Slides, Quizlet, Gimkit, Pear Deck, worksheets, and videos.</p>
+      </div>
+      <input class="search" id="search" placeholder="Search: cognates, classroom objects, ser, numbers..." />
+      <div class="pill-row" id="filters">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="vocabulary">Vocabulary</button>
+        <button class="pill" data-filter="grammar">Grammar</button>
+        <button class="pill" data-filter="speaking">Speaking</button>
+        <button class="pill" data-filter="listening">Listening</button>
+      </div>
+      <div style="height:16px"></div>
+      <div class="cards" id="unitCards"></div>
+    </div>
+  </section>
+
+  <section id="practice">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>Practice zone</h2></div>
+        <p>Two working activities are included in this first version: pronunciation flashcards and an instant-feedback mini quiz.</p>
+      </div>
+      <div class="practice-grid">
+        <div class="practice">
+          <div class="eyebrow">Vocabulary flashcards</div>
+          <h3>Objetos de la clase</h3>
+          <div class="flashcard" id="flashcard" title="Tap to flip">
+            <div>
+              <div class="big" id="flashWord">el lápiz</div>
+              <div class="hint" id="flashHint">Tap card to reveal English</div>
+            </div>
+          </div>
+          <div class="flash-actions">
+            <button class="btn secondary" id="speakBtn">🔊 Hear it</button>
+            <button class="btn primary" id="nextFlash">Next →</button>
+          </div>
+        </div>
+
+        <div class="practice">
+          <div class="eyebrow">Quick check</div>
+          <h3>Spanish 1 Mini Quiz</h3>
+          <div id="quizBox"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>Build all 4 skills</h2></div>
+        <p>Spanish is more than vocabulary lists. Each unit should give students a chance to listen, speak, read, and write.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="icon" style="background:var(--teal)">L</div><h3>Escuchar</h3><p>Short audio, dictation, teacher recordings, and comprehension checks.</p><div class="tags"><span class="tag">Audio</span><span class="tag">Dictado</span></div></article>
+        <article class="card"><div class="icon" style="background:var(--coral)">H</div><h3>Hablar</h3><p>Sentence starters, partner prompts, pronunciation, and short audio presentations.</p><div class="tags"><span class="tag">Speaking</span><span class="tag">Pronunciation</span></div></article>
+        <article class="card"><div class="icon" style="background:var(--blue)">R</div><h3>Leer</h3><p>Beginner readings with cognates, context clues, and comprehension questions.</p><div class="tags"><span class="tag">Reading</span><span class="tag">Cognates</span></div></article>
+        <article class="card"><div class="icon" style="background:var(--lav)">E</div><h3>Escribir</h3><p>Guided writing, sentence frames, short responses, and personal descriptions.</p><div class="tags"><span class="tag">Writing</span><span class="tag">Frames</span></div></article>
+        <article class="card"><div class="icon" style="background:var(--gold)">G</div><h3>Gramática</h3><p>Grammar in small, useful chunks connected to real communication.</p><div class="tags"><span class="tag">Ser</span><span class="tag">Verbs</span></div></article>
+        <article class="card"><div class="icon" style="background:var(--green)">J</div><h3>Jugar</h3><p>Review games, task-card challenges, quick competitions, and self-check practice.</p><div class="tags"><span class="tag">Games</span><span class="tag">Review</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <div class="wrap">
+      <div class="resource-strip">
+        <div>
+          <small style="letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:#f2bd58">Teacher-ready structure</small>
+          <h2 style="font-size:2.5rem;margin:10px 0">Make this your digital Spanish classroom.</h2>
+          <p>Every unit card can link to your Google Classroom assignments, Google Slides, Google Forms, Quizlet sets, Gimkit games, videos, or downloadable worksheets. The site can also grow into separate pages for each unit.</p>
+          <a class="btn" style="background:white;color:var(--ink)" href="#units">Explore starter units</a>
+        </div>
+        <div class="teacher-box">
+          <strong>Easy next additions</strong>
+          <ul>
+            <li>Google Classroom button</li>
+            <li>Your own recorded audio</li>
+            <li>Unit-by-unit quizzes</li>
+            <li>Speaking-project upload directions</li>
+            <li>Parent resources / syllabus</li>
+            <li>Bilingual portfolio section</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Profe Leal Español</strong><br/>
+    Learn with curiosity • Speak with courage • Respect every culture
+  </div>
+</footer>
+
+<script>
+const units = [
+  {title:"El alfabeto",cat:["vocabulary","listening"],icon:"A",color:"var(--coral)",desc:"Recognize Spanish letter names and sounds.",tags:["Alphabet","Pronunciation"]},
+  {title:"Cognados",cat:["vocabulary","reading"],icon:"CO",color:"var(--gold)",desc:"Use familiar word patterns to unlock meaning.",tags:["Perfect","Regular","False"]},
+  {title:"Objetos de la clase",cat:["vocabulary","listening"],icon:"CL",color:"var(--teal)",desc:"Name the people and objects you see in class.",tags:["Vocabulary","Audio"]},
+  {title:"Saludos y despedidas",cat:["speaking","listening"],icon:"¡H!",color:"var(--blue)",desc:"Greet people, introduce yourself, and say goodbye.",tags:["Speaking","Listening"]},
+  {title:"¿Quién soy yo?",cat:["speaking","writing"],icon:"YO",color:"var(--lav)",desc:"Introduce yourself and share personal information.",tags:["Speaking","Project"]},
+  {title:"Gustos y disgustos",cat:["speaking","grammar"],icon:"♥",color:"var(--coral)",desc:"Say what you like, dislike, and have in common.",tags:["Me gusta","No me gusta"]},
+  {title:"Los números",cat:["vocabulary","listening"],icon:"123",color:"var(--green)",desc:"Recognize and use numbers in real-life contexts.",tags:["Numbers","Listening"]},
+  {title:"La hora",cat:["vocabulary","speaking"],icon:"⏱",color:"var(--gold)",desc:"Ask and tell time in Spanish.",tags:["Time","Speaking"]},
+  {title:"Pronombres sujetos",cat:["grammar"],icon:"PR",color:"var(--blue)",desc:"Match subject pronouns with people and verb forms.",tags:["Yo","Tú","Nosotros"]},
+  {title:"SER y ESTAR",cat:["grammar"],icon:"SE",color:"var(--teal)",desc:"Build a strong foundation with two essential verbs.",tags:["Grammar","Verbs"]},
+  {title:"Verbos -AR",cat:["grammar","speaking"],icon:"AR",color:"var(--lav)",desc:"Use present-tense -AR verbs to talk about everyday life.",tags:["Present","Verbs"]},
+  {title:"Lectura para principiantes",cat:["reading","vocabulary"],icon:"LE",color:"var(--green)",desc:"Read short texts using cognates and context clues.",tags:["Reading","Comprehension"]}
+];
+
+const unitCards = document.getElementById("unitCards");
+function renderUnits(filter="all", query=""){
+  unitCards.innerHTML="";
+  const q=query.toLowerCase().trim();
+  units.filter(u => (filter==="all" || u.cat.includes(filter)) &&
+    (u.title.toLowerCase().includes(q) || u.desc.toLowerCase().includes(q) || u.tags.join(" ").toLowerCase().includes(q)))
+    .forEach(u=>{
+      const el=document.createElement("article");
+      el.className="card";
+      el.innerHTML=`<div class="icon" style="background:${u.color}">${u.icon}</div>
+        <h3>${u.title}</h3><p>${u.desc}</p>
+        <div class="tags">${u.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+        <button class="btn secondary" onclick="alert('This button is ready to connect to your lesson, Google Classroom assignment, Google Form, or practice page.')">Open lesson →</button>`;
+      unitCards.appendChild(el);
+    });
+}
+renderUnits();
+
+let activeFilter="all";
+document.querySelectorAll(".pill").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".pill").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter=btn.dataset.filter;
+    renderUnits(activeFilter,document.getElementById("search").value);
+  });
+});
+document.getElementById("search").addEventListener("input",e=>renderUnits(activeFilter,e.target.value));
+
+const vocab = [
+  ["el lápiz","pencil"],["el cuaderno","notebook"],["la mochila","backpack"],
+  ["la mesa","table"],["la silla","chair"],["el libro","book"],["la computadora","computer"],
+  ["la puerta","door"],["la ventana","window"],["el bolígrafo","pen"]
+];
+let vi=0, flipped=false;
+function showFlash(){
+  const [es,en]=vocab[vi];
+  document.getElementById("flashWord").textContent=flipped?en:es;
+  document.getElementById("flashHint").textContent=flipped?"Tap to see Spanish":"Tap card to reveal English";
+}
+document.getElementById("flashcard").addEventListener("click",()=>{flipped=!flipped;showFlash()});
+document.getElementById("nextFlash").addEventListener("click",()=>{vi=(vi+1)%vocab.length;flipped=false;showFlash()});
+document.getElementById("speakBtn").addEventListener("click",()=>{
+  const utter=new SpeechSynthesisUtterance(vocab[vi][0]);
+  utter.lang="es-MX";
+  speechSynthesis.cancel(); speechSynthesis.speak(utter);
+});
+
+const quiz = [
+ {q:"What does “la mochila” mean?",o:["The backpack","The pencil","The desk"],a:0},
+ {q:"Choose the correct greeting:",o:["Buenas noches","El cuaderno","Me gusta"],a:0},
+ {q:"“Me gusta la música” means…",o:["I study music","I like music","I need music"],a:1},
+ {q:"Which is a Spanish subject pronoun?",o:["porque","nosotros","clase"],a:1},
+ {q:"What is a cognate?",o:["A word with a related form and meaning in two languages","A past-tense verb","A classroom command"],a:0}
+];
+let qi=0, score=0, locked=false;
+function renderQuiz(){
+  if(qi>=quiz.length){
+    document.getElementById("quizBox").innerHTML=
+      `<div style="padding:26px 0"><div style="font-size:3rem;font-weight:950">${score}/${quiz.length}</div>
+       <p>${score===quiz.length?"¡Excelente! Perfect score.":score>=3?"¡Muy bien! Keep practicing.":"Good start — review and try again."}</p>
+       <button class="btn primary" onclick="restartQuiz()">Try again</button></div>`;
+    return;
+  }
+  locked=false;
+  const item=quiz[qi];
+  document.getElementById("quizBox").innerHTML=
+    `<div style="color:var(--muted);font-weight:800">Question ${qi+1} of ${quiz.length}</div>
+     <div class="quiz-q">${item.q}</div>
+     <div class="options">${item.o.map((x,i)=>`<button class="option" onclick="answerQuiz(${i},this)">${x}</button>`).join("")}</div>
+     <div class="feedback" id="feedback"></div>`;
+}
+function answerQuiz(i,btn){
+  if(locked)return; locked=true;
+  const item=quiz[qi];
+  const opts=document.querySelectorAll(".option");
+  opts[item.a].classList.add("correct");
+  if(i===item.a){score++;document.getElementById("feedback").textContent="¡Correcto!";}
+  else{btn.classList.add("wrong");document.getElementById("feedback").textContent="Almost — review the correct answer.";}
+  setTimeout(()=>{qi++;renderQuiz()},900);
+}
+function restartQuiz(){qi=0;score=0;renderQuiz()}
+renderQuiz();
+</script>
+</body>
+</html>
