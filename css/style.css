@@ -1,1 +1,50 @@
 /* Profe Leal Español - Estilos principales */
+/* =========================================
+   PROFE LEAL ESPAÑOL — PALETA DE COLORES
+   Cambia estos colores para personalizar
+   toda la página fácilmente.
+   ========================================= */
+
+:root {
+  /* Colores principales */
+  --azul-cielo: #37B8EF;
+  --azul-profundo: #092E59;
+  --naranja: #FF6816;
+  --amarillo-sol: #FFC62D;
+
+  /* Fondos */
+  --crema: #FFFDF7;
+  --blanco: #FFFFFF;
+
+  /* Colores divertidos para actividades */
+  --menta: #66D7C1;
+  --rosa: #FF88A8;
+  --lavanda: #C9A3F1;
+
+  /* Texto */
+  --texto: #092E59;
+  --texto-suave: #49657D;
+
+  /* Diseño */
+  --radio: 24px;
+  --sombra: 0 12px 28px rgba(20, 59, 91, 0.14);
+}
+
+/* =========================================
+   ESTILO GENERAL DE LA PÁGINA
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--texto);
+  font-family: "Trebuchet MS", "Arial Rounded MT Bold", Arial, sans-serif;
+}
