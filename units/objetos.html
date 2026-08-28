@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Los objetos de la clase | Profe Leal Español</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.unit-page{background:linear-gradient(180deg,#eaf8ff 0,#fffdf7 28%);min-height:100vh}
+.unit-wrap{width:min(1180px,92vw);margin:auto;padding:28px 0 70px}
+.unit-top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.back{display:inline-flex;gap:8px;align-items:center;padding:11px 16px;border-radius:999px;background:white;border:2px solid var(--navy);font-weight:900}
+.hero-unit{margin-top:24px;background:var(--sky);border-radius:34px;padding:34px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;box-shadow:var(--shadow)}
+.hero-unit h1{font-size:clamp(44px,6vw,82px);margin:0;line-height:.95;color:var(--navy)}
+.hero-unit h1 span{color:var(--orange)}
+.hero-unit p{font-size:20px;line-height:1.5;font-weight:800}
+.progress-card{background:#fff;border-radius:26px;padding:24px;text-align:center}
+.progress-num{font-size:38px;font-weight:1000;color:var(--orange)}
+.progress-bar{height:14px;background:#edf3f7;border-radius:99px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow));transition:.25s}
+.stations{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:24px 0}
+.station{border:0;border-radius:20px;padding:14px 10px;font-weight:1000;cursor:pointer;background:white;box-shadow:var(--shadow)}
+.station.active{background:var(--orange);color:#fff}
+.panel{display:none;background:white;border-radius:30px;padding:28px;box-shadow:var(--shadow);margin-top:16px}
+.panel.active{display:block}
+.panel h2{font-size:36px;margin:0 0 8px}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.filter{border:0;border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer;background:#edf7fd}
+.filter.active{background:var(--navy);color:#fff}
+.vocab-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.vcard{border:2px solid #e5eef5;border-radius:22px;padding:18px;background:#fffdf8;min-height:170px;display:flex;flex-direction:column;justify-content:space-between}
+.vicon{font-size:44px}
+.vcard h3{font-size:21px;margin:9px 0 4px}
+.vcard small{color:#58748b;font-weight:800}
+.speak{border:0;border-radius:999px;background:var(--sky);color:var(--navy);padding:9px 13px;font-weight:1000;cursor:pointer;margin-top:10px}
+.activity-card{max-width:760px;margin:18px auto;background:#f8fbfd;border-radius:24px;padding:24px}
+.question{font-size:28px;font-weight:1000;margin:6px 0 18px}
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.answer{border:2px solid #d7e6ef;background:white;border-radius:18px;padding:15px;font-weight:900;cursor:pointer}
+.answer.good{background:#e5fff3;border-color:#36b981}
+.answer.bad{background:#fff0f2;border-color:#e77888}
+.primary{border:0;background:var(--orange);color:white;border-radius:999px;padding:13px 20px;font-weight:1000;cursor:pointer}
+.secondary{border:2px solid var(--navy);background:white;color:var(--navy);border-radius:999px;padding:11px 18px;font-weight:1000;cursor:pointer}
+.prompt{font-size:25px;line-height:1.5;background:#fff8d9;border-left:8px solid var(--yellow);padding:20px;border-radius:18px}
+.score{font-size:30px;font-weight:1000;color:var(--orange)}
+@media(max-width:900px){.hero-unit{grid-template-columns:1fr}.stations{grid-template-columns:repeat(3,1fr)}.vocab-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.stations{grid-template-columns:repeat(2,1fr)}.vocab-grid{grid-template-columns:1fr}.answers{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="unit-page">
+<div class="unit-wrap">
+  <div class="unit-top">
+    <a class="back" href="../index.html#unidades">← Volver a Unidades</a>
+    <strong>PROFE LEAL ESPAÑOL ☀️</strong>
+  </div>
+
+  <section class="hero-unit">
+    <div>
+      <div style="font-weight:1000;letter-spacing:1px">UNIDAD 1 · VOCABULARIO</div>
+      <h1>Los objetos <span>de la clase</span></h1>
+      <p>Aprende las palabras, escúchalas, practica, juega y termina con un reto. Un pasito a la vez. ♡</p>
+    </div>
+    <div class="progress-card">
+      <div>MI PROGRESO</div>
+      <div class="progress-num"><span id="done">0</span>/6</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <small>Completa cada estación</small>
+    </div>
+  </section>
+
+  <div class="stations">
+    <button class="station active" data-panel="learn">📖 APRENDE</button>
+    <button class="station" data-panel="listen">🎧 ESCUCHA</button>
+    <button class="station" data-panel="practice">✏️ PRACTICA</button>
+    <button class="station" data-panel="play">🎮 JUEGA</button>
+    <button class="station" data-panel="speak">🎤 HABLA</button>
+    <button class="station" data-panel="final">🏆 RETO FINAL</button>
+  </div>
+
+  <section class="panel active" id="learn">
+    <h2>📖 Aprende</h2>
+    <p>Explora el vocabulario por categorías. Pulsa 🔊 para escuchar la pronunciación.</p>
+    <div class="filters" id="filters"></div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+    <div style="margin-top:22px"><button class="primary" onclick="complete('learn')">✓ Terminé esta estación</button></div>
+  </section>
+
+  <section class="panel" id="listen">
+    <h2>🎧 Escucha</h2>
+    <p>Escucha la palabra y selecciona su significado en inglés.</p>
+    <div class="activity-card">
+      <button class="primary" onclick="newListen()">🔊 Escuchar palabra</button>
+      <div class="question" id="listenQ">Presiona “Escuchar palabra”.</div>
+      <div class="answers" id="listenAnswers"></div>
+      <div id="listenFeedback"></div>
+    </div>
+    <button class="primary" onclick="complete('listen')">✓ Terminé esta estación</button>
+  </section>
+
+  <section class="panel" id="practice">
+    <h2>✏️ Practica</h2>
+    <p>Selecciona la palabra en español correcta.</p>
+    <div class="activity-card">
+      <div class="question" id="practiceQ"></div>
+      <div class="answers" id="practiceAnswers"></div>
+      <div style="margin-top:16px"><button class="secondary" onclick="newPractice()">Otra pregunta →</button></div>
+    </div>
+    <button class="primary" onclick="complete('practice')">✓ Terminé esta estación</button>
+  </section>
+
+  <section class="panel" id="play">
+    <h2>🎮 Juega: Racha de 10</h2>
+    <p>¿Cuántas puedes contestar correctamente de 10?</p>
+    <div class="activity-card">
+      <div class="score">Puntos: <span id="gameScore">0</span>/10</div>
+      <div class="question" id="gameQ"></div>
+      <div class="answers" id="gameAnswers"></div>
+      <div id="gameFeedback"></div>
+      <div style="margin-top:16px"><button class="secondary" onclick="startGame()">Reiniciar juego</button></div>
+    </div>
+    <button class="primary" onclick="complete('play')">✓ Terminé esta estación</button>
+  </section>
+
+  <section class="panel" id="speak">
+    <h2>🎤 Habla</h2>
+    <p>Lee el reto en voz alta. No necesitas ser perfecto; necesitas atreverte.</p>
+    <div class="activity-card">
+      <div class="prompt" id="speakPrompt"></div>
+      <div style="margin-top:16px"><button class="secondary" onclick="newSpeak()">Nuevo reto →</button></div>
+    </div>
+    <button class="primary" onclick="complete('speak')">✓ Terminé esta estación</button>
+  </section>
+
+  <section class="panel" id="final">
+    <h2>🏆 Reto final</h2>
+    <p>Contesta 10 preguntas. Tu resultado aparece al instante.</p>
+    <div class="activity-card">
+      <div class="score">Resultado: <span id="finalScore">0</span>/<span id="finalCount">0</span></div>
+      <div class="question" id="finalQ"></div>
+      <div class="answers" id="finalAnswers"></div>
+      <div id="finalFeedback"></div>
+      <div style="margin-top:16px"><button class="secondary" onclick="startFinal()">Empezar de nuevo</button></div>
+    </div>
+    <button class="primary" onclick="complete('final')">✓ Completar unidad</button>
+  </section>
+</div>
+
+<script>
+const vocab = [{"es": "la mochila", "en": "backpack", "icon": "🎒", "cat": "En mi mochila"}, {"es": "el borrador", "en": "eraser", "icon": "🧽", "cat": "En mi mochila"}, {"es": "la calculadora", "en": "calculator", "icon": "🧮", "cat": "En mi mochila"}, {"es": "el cuaderno", "en": "notebook", "icon": "📓", "cat": "En mi mochila"}, {"es": "el diccionario", "en": "dictionary", "icon": "📕", "cat": "En mi mochila"}, {"es": "el pupitre", "en": "student desk", "icon": "🪑", "cat": "En el salón"}, {"es": "el lápiz", "en": "pencil", "icon": "✏️", "cat": "Materiales"}, {"es": "el libro", "en": "book", "icon": "📘", "cat": "En mi mochila"}, {"es": "el papel", "en": "paper", "icon": "📄", "cat": "Materiales"}, {"es": "el bolígrafo / la pluma", "en": "pen", "icon": "🖊️", "cat": "En mi mochila"}, {"es": "la regla", "en": "ruler", "icon": "📏", "cat": "Materiales"}, {"es": "la grapadora", "en": "stapler", "icon": "📎", "cat": "Materiales"}, {"es": "los lápices de color", "en": "colored pencils", "icon": "🖍️", "cat": "Materiales"}, {"es": "la carpeta", "en": "folder", "icon": "📁", "cat": "En mi mochila"}, {"es": "el marcador", "en": "marker", "icon": "🖍️", "cat": "Materiales"}, {"es": "las tijeras", "en": "scissors", "icon": "✂️", "cat": "Materiales"}, {"es": "la bandera", "en": "flag", "icon": "🚩", "cat": "En el salón"}, {"es": "la luz", "en": "light", "icon": "💡", "cat": "En el salón"}, {"es": "el basurero", "en": "trash can", "icon": "🗑️", "cat": "En el salón"}, {"es": "el sacapuntas", "en": "pencil sharpener", "icon": "🔧", "cat": "Materiales"}, {"es": "la tableta", "en": "tablet", "icon": "📱", "cat": "Tecnología"}, {"es": "el mapa", "en": "map", "icon": "🗺️", "cat": "En el salón"}, {"es": "el pegamento", "en": "glue", "icon": "🧴", "cat": "Materiales"}, {"es": "el calendario", "en": "calendar", "icon": "📅", "cat": "En el salón"}, {"es": "el juego", "en": "game", "icon": "🎮", "cat": "Objetos especiales"}, {"es": "los audífonos", "en": "headphones", "icon": "🎧", "cat": "Tecnología"}, {"es": "la tiza", "en": "chalk", "icon": "🖍️", "cat": "Materiales"}, {"es": "las tarjetas", "en": "cards", "icon": "🃏", "cat": "Objetos especiales"}, {"es": "el teclado", "en": "keyboard", "icon": "⌨️", "cat": "Tecnología"}, {"es": "los crayones", "en": "crayons", "icon": "🖍️", "cat": "Materiales"}, {"es": "el microscopio", "en": "microscope", "icon": "🔬", "cat": "Objetos especiales"}, {"es": "la pizarra", "en": "board", "icon": "🧑‍🏫", "cat": "En el salón"}, {"es": "el estante de libros", "en": "bookshelf", "icon": "📚", "cat": "En el salón"}, {"es": "la puerta", "en": "door", "icon": "🚪", "cat": "En el salón"}, {"es": "el cargador", "en": "charger", "icon": "🔌", "cat": "Tecnología"}, {"es": "la paleta de pinturas", "en": "paint palette", "icon": "🎨", "cat": "Objetos especiales"}, {"es": "el cartel / el póster", "en": "poster", "icon": "🪧", "cat": "En el salón"}, {"es": "la campana", "en": "bell", "icon": "🔔", "cat": "Objetos especiales"}, {"es": "la canasta de las copias", "en": "copy basket", "icon": "🧺", "cat": "En el salón"}, {"es": "la computadora", "en": "computer", "icon": "🖥️", "cat": "Tecnología"}, {"es": "el escritorio", "en": "desk", "icon": "🪑", "cat": "En el salón"}, {"es": "el móvil", "en": "cell phone", "icon": "📱", "cat": "Tecnología"}, {"es": "la pantalla", "en": "screen", "icon": "🖥️", "cat": "Tecnología"}, {"es": "la pelota", "en": "ball", "icon": "🏐", "cat": "Objetos especiales"}, {"es": "el examen", "en": "exam", "icon": "📝", "cat": "Objetos especiales"}, {"es": "la silla", "en": "chair", "icon": "🪑", "cat": "En el salón"}, {"es": "la mesa", "en": "table", "icon": "🪑", "cat": "En el salón"}, {"es": "la ventana", "en": "window", "icon": "🪟", "cat": "En el salón"}, {"es": "la cinta adhesiva", "en": "tape", "icon": "🧻", "cat": "Materiales"}, {"es": "el pase del baño", "en": "bathroom pass", "icon": "🚻", "cat": "Objetos especiales"}, {"es": "el globo", "en": "globe", "icon": "🌍", "cat": "En el salón"}, {"es": "el estuche", "en": "pencil case", "icon": "👝", "cat": "En mi mochila"}, {"es": "el pincel", "en": "paintbrush", "icon": "🖌️", "cat": "Materiales"}, {"es": "la computadora portátil", "en": "laptop", "icon": "💻", "cat": "Tecnología"}, {"es": "el clip de papel", "en": "paper clip", "icon": "📎", "cat": "Materiales"}, {"es": "la tachuela", "en": "thumbtack", "icon": "📌", "cat": "Materiales"}, {"es": "la pizarra inteligente", "en": "smart board", "icon": "🖥️", "cat": "Tecnología"}];
+const cats = ['Todas', ...new Set(vocab.map(v=>v.cat))];
+let completed = new Set(JSON.parse(localStorage.getItem('objetosProgress')||'[]'));
+let currentListen = null, currentPractice = null;
+let gameIndex=0, gameScore=0, finalIndex=0, finalScore=0, finalAnswered=false;
+
+function speakSpanish(text){
+  if(!('speechSynthesis' in window)) return alert('Tu navegador no tiene lectura en voz alta disponible.');
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(' / ',' o '));
+  u.lang='es-MX'; u.rate=.82;
+  speechSynthesis.speak(u);
+}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function choiceSet(correct, key){
+  const others=shuffle(vocab.filter(v=>v!==correct)).slice(0,3);
+  return shuffle([correct,...others]).map(v=>({label:v[key],item:v}));
+}
+function updateProgress(){
+  document.getElementById('done').textContent=completed.size;
+  document.getElementById('progressFill').style.width=(completed.size/6*100)+'%';
+}
+function complete(id){
+  completed.add(id); localStorage.setItem('objetosProgress',JSON.stringify([...completed])); updateProgress();
+  alert(id==='final' ? '¡Unidad completada! 🏆' : '¡Estación completada! ⭐');
+}
+document.querySelectorAll('.station').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.station').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); document.getElementById(b.dataset.panel).classList.add('active');
+});
+
+function renderFilters(){
+  const box=document.getElementById('filters');
+  cats.forEach((c,i)=>{
+    const b=document.createElement('button'); b.className='filter'+(i===0?' active':''); b.textContent=c;
+    b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderVocab(c)};
+    box.appendChild(b);
+  });
+}
+function renderVocab(cat='Todas'){
+  const box=document.getElementById('vocabGrid'); box.innerHTML='';
+  vocab.filter(v=>cat==='Todas'||v.cat===cat).forEach(v=>{
+    const d=document.createElement('article'); d.className='vcard';
+    d.innerHTML=`<div><div class="vicon">${v.icon}</div><h3>${v.es}</h3><small>${v.en}</small></div><button class="speak">🔊 Escuchar</button>`;
+    d.querySelector('button').onclick=()=>speakSpanish(v.es); box.appendChild(d);
+  });
+}
+function newListen(){
+  currentListen=vocab[Math.floor(Math.random()*vocab.length)];
+  document.getElementById('listenQ').textContent='¿Qué palabra escuchaste?';
+  speakSpanish(currentListen.es);
+  const box=document.getElementById('listenAnswers'); box.innerHTML='';
+  choiceSet(currentListen,'en').forEach(o=>{
+    const b=document.createElement('button');b.className='answer';b.textContent=o.label;
+    b.onclick=()=>{document.querySelectorAll('#listenAnswers .answer').forEach(x=>x.disabled=true);b.classList.add(o.item===currentListen?'good':'bad');document.getElementById('listenFeedback').textContent=o.item===currentListen?'¡Correcto! ⭐':'Era: '+currentListen.en;};
+    box.appendChild(b);
+  });
+}
+function newPractice(){
+  currentPractice=vocab[Math.floor(Math.random()*vocab.length)];
+  document.getElementById('practiceQ').textContent=`${currentPractice.icon}  “${currentPractice.en}”`;
+  const box=document.getElementById('practiceAnswers');box.innerHTML='';
+  choiceSet(currentPractice,'es').forEach(o=>{
+    const b=document.createElement('button');b.className='answer';b.textContent=o.label;
+    b.onclick=()=>{document.querySelectorAll('#practiceAnswers .answer').forEach(x=>x.disabled=true);b.classList.add(o.item===currentPractice?'good':'bad')};
+    box.appendChild(b);
+  });
+}
+function startGame(){
+  gameIndex=0;gameScore=0;document.getElementById('gameScore').textContent=0;nextGame();
+}
+function nextGame(){
+  if(gameIndex>=10){document.getElementById('gameQ').textContent='¡Terminaste!';document.getElementById('gameAnswers').innerHTML='';document.getElementById('gameFeedback').textContent=`Tu puntuación: ${gameScore}/10`;return}
+  const q=vocab[Math.floor(Math.random()*vocab.length)];
+  document.getElementById('gameQ').textContent=`${q.icon}  ¿Cómo se dice “${q.en}”?`;
+  const box=document.getElementById('gameAnswers');box.innerHTML='';
+  choiceSet(q,'es').forEach(o=>{const b=document.createElement('button');b.className='answer';b.textContent=o.label;b.onclick=()=>{if(o.item===q)gameScore++;gameIndex++;document.getElementById('gameScore').textContent=gameScore;nextGame()};box.appendChild(b)});
+}
+const speakPrompts=[
+ 'Mira a tu alrededor y di: “En la clase hay…” + 3 objetos.',
+ 'Di tres cosas que tienes en tu mochila usando: “Tengo…”',
+ 'Escoge un objeto y pregunta a un compañero: “¿Tienes ___?”',
+ 'Di una oración con: “Necesito…” + un objeto de la clase.',
+ 'Di una oración con: “No tengo…” + un objeto de la clase.',
+ 'Describe dónde está un objeto usando: “Está en la mesa / mochila / escritorio.”'
+];
+function newSpeak(){document.getElementById('speakPrompt').textContent=speakPrompts[Math.floor(Math.random()*speakPrompts.length)]}
+function startFinal(){
+  finalIndex=0;finalScore=0;document.getElementById('finalScore').textContent=0;document.getElementById('finalCount').textContent=0;nextFinal();
+}
+function nextFinal(){
+  finalAnswered=false;
+  if(finalIndex>=10){document.getElementById('finalQ').textContent='¡Reto terminado! 🏆';document.getElementById('finalAnswers').innerHTML='';document.getElementById('finalFeedback').textContent=`Resultado final: ${finalScore}/10`;return}
+  const q=vocab[Math.floor(Math.random()*vocab.length)];
+  document.getElementById('finalQ').textContent=`${q.icon}  Selecciona la palabra correcta:`;
+  const box=document.getElementById('finalAnswers');box.innerHTML='';
+  choiceSet(q,'es').forEach(o=>{const b=document.createElement('button');b.className='answer';b.textContent=o.label;b.onclick=()=>{if(finalAnswered)return;finalAnswered=true;if(o.item===q){finalScore++;b.classList.add('good')}else b.classList.add('bad');finalIndex++;document.getElementById('finalScore').textContent=finalScore;document.getElementById('finalCount').textContent=finalIndex;setTimeout(nextFinal,650)};box.appendChild(b)});
+}
+renderFilters();renderVocab();updateProgress();newPractice();newSpeak();startGame();startFinal();
+</script>
+</body>
+</html>
