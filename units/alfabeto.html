@@ -90,7 +90,95 @@
     .station .icon {
       font-size: 42px;
     }
+.alphabet-station {
+  grid-column: 1 / -1;
+  padding: 34px;
+}
 
+.alphabet-preview {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 10px;
+  max-width: 850px;
+  margin: 25px auto;
+}
+
+.alphabet-preview span {
+  background: white;
+  color: #17324d;
+  border: 2px solid #8ed8f8;
+  border-radius: 14px;
+  padding: 12px 6px;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.alphabet-preview span:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 8px 14px rgba(0,0,0,.12);
+}
+
+.alphabet-preview .special-letter {
+  background: #ff6b1a;
+  color: white;
+  border-color: #ff6b1a;
+  font-size: 28px;
+}
+
+.vowels-preview {
+  max-width: 500px;
+  margin: 25px auto 15px;
+  background: #fff8dc;
+  border: 3px solid #ffcf45;
+  border-radius: 20px;
+  padding: 18px;
+  color: #17324d;
+}
+
+.vowels-preview strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.vowels-preview div {
+  color: #ff6b1a;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
+
+.ene-note {
+  max-width: 600px;
+  margin: 18px auto 0;
+  padding: 12px 16px;
+  background: #eaf7ff;
+  border-radius: 14px;
+  color: #17324d;
+  font-weight: bold;
+}
+
+@media (max-width: 850px) {
+  .alphabet-preview {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .alphabet-preview {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .alphabet-preview span {
+    font-size: 20px;
+  }
+
+  .alphabet-station {
+    padding: 24px 15px;
+  }
+}
     .station h2 {
       margin: 12px 0 8px;
     }
@@ -126,11 +214,48 @@
 
   <main class="stations">
 
-    <div class="station">
-      <div class="icon">📖</div>
-      <h2>Aprende</h2>
-      <p>Las 27 letras del alfabeto</p>
-    </div>
+   <div class="station alphabet-station">
+  <div class="icon">🔤</div>
+  <h2>Aprende</h2>
+  <p>Descubre las 27 letras del alfabeto español.</p>
+
+  <div class="alphabet-preview">
+    <span>A</span>
+    <span>B</span>
+    <span>C</span>
+    <span>D</span>
+    <span>E</span>
+    <span>F</span>
+    <span>G</span>
+    <span>H</span>
+    <span>I</span>
+    <span>J</span>
+    <span>K</span>
+    <span>L</span>
+    <span>M</span>
+    <span>N</span>
+     <span class="special-letter">Ñ</span>
+    <span>O</span>
+    <span>P</span>
+    <span>Q</span>
+    <span>R</span>
+    <span>S</span>
+    <span>T</span>
+    <span>U</span>
+    <span>V</span>
+    <span>W</span>
+    <span>X</span>
+    <span>Y</span>
+    <span>Z</span>
+  </div>
+
+  <div class="vowels-preview">
+    <strong>Las vocales</strong>
+    <div>A · E · I · O · U</div>
+  </div>
+
+  <p class="ene-note">⭐ ¡No olvides la letra especial del español: Ñ!</p>
+</div> 
 
     <div class="station">
       <div class="icon">🎧</div>
