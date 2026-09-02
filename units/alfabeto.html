@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El alfabeto | Profe Leal Español</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffaf4;
+      color: #333;
+    }
+
+    header {
+      background: #72d5df;
+      padding: 18px 30px;
+    }
+
+    .back {
+      color: #17324d;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px 35px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #666;
+    }
+
+    .stations {
+      max-width: 1000px;
+      margin: 20px auto 60px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .station {
+      background: white;
+      border-radius: 22px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
+
+    .station .icon {
+      font-size: 42px;
+    }
+
+    .station h2 {
+      margin: 12px 0 8px;
+    }
+
+    .station p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 750px) {
+      .stations {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="back" href="../index.html">← Profe Leal Español</a>
+  </header>
+
+  <section class="hero">
+    <div>🔤 LA AVENTURA DEL ESPAÑOL</div>
+    <h1>El alfabeto</h1>
+    <p>Aprende las letras, escucha los sonidos y practica cómo deletrear en español.</p>
+  </section>
+
+  <main class="stations">
+
+    <div class="station">
+      <div class="icon">📖</div>
+      <h2>Aprende</h2>
+      <p>Las 27 letras del alfabeto</p>
+    </div>
+
+    <div class="station">
+      <div class="icon">🎧</div>
+      <h2>Escucha</h2>
+      <p>Escucha y repite</p>
+    </div>
+
+    <div class="station">
+      <div class="icon">✏️</div>
+      <h2>Practica</h2>
+      <p>Reconoce letras y sonidos</p>
+    </div>
+
+    <div class="station">
+      <div class="icon">🎮</div>
+      <h2>Juega</h2>
+      <p>Pon a prueba lo que sabes</p>
+    </div>
+
+    <div class="station">
+      <div class="icon">🎙️</div>
+      <h2>Habla</h2>
+      <p>Practica cómo deletrear</p>
+    </div>
+
+    <div class="station">
+      <div class="icon">🏆</div>
+      <h2>Reto Final</h2>
+      <p>Demuestra lo que aprendiste</p>
+    </div>
+
+  </main>
+
+</body>
+</html>
