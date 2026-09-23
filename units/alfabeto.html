@@ -157,51 +157,92 @@
   grid-column: 1 / -1;
 }
 
-.listen-controls {
-  max-width: 720px;
-  margin: 22px auto 0;
+.listen-game {
+  max-width: 760px;
+  margin: 24px auto 0;
   background: white;
-  border-radius: 18px;
-  padding: 24px;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 5px 14px rgba(0,0,0,.07);
 }
 
-.listen-prompt {
-  font-size: 18px;
-  color: #17324d;
-  font-weight: bold;
-  margin-bottom: 18px;
-}
-
-.listen-buttons {
+.listen-top {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+  color: #17324d;
+  font-weight: bold;
 }
 
-.listen-btn {
+.listen-score {
+  background: #fff8dc;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.sound-button {
+  display: block;
+  margin: 24px auto 12px;
   border: 0;
-  border-radius: 14px;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 50%;
+  width: 92px;
+  height: 92px;
+  font-size: 38px;
   cursor: pointer;
   background: #ffcf45;
-  color: #17324d;
-  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,.12);
 }
 
-.listen-btn:hover,
-.listen-btn:focus {
-  transform: translateY(-2px);
-  outline: 3px solid rgba(255,107,26,.2);
+.sound-button:hover { transform: scale(1.05); }
+
+.listen-hint { color: #667788; }
+
+.answer-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 24px auto 18px;
+  max-width: 560px;
 }
 
-.listen-answer {
-  margin-top: 18px;
-  min-height: 28px;
+.answer-option {
+  background: #eaf7ff;
+  border: 3px solid #8ed8f8;
+  border-radius: 18px;
+  padding: 18px 8px;
+  font-size: 30px;
   font-weight: bold;
   color: #17324d;
+  cursor: pointer;
+}
+
+.answer-option:hover { transform: translateY(-3px); }
+.answer-option.correct { background: #e8faf5; border-color: #72d5c8; }
+.answer-option.wrong { background: #fff0f0; border-color: #f49ab6; }
+
+.listen-feedback {
+  min-height: 52px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #17324d;
+}
+
+.next-listen {
+  display: none;
+  margin: 10px auto 0;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 20px;
+  background: #ff6b1a;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 550px) {
+  .answer-options { grid-template-columns: 1fr; }
 }
 
 .letter-guide {
@@ -346,17 +387,18 @@
     <div class="station listen-station">
       <div class="icon">🎧</div>
       <h2>Escucha</h2>
-      <p>Escucha una letra, repítela y después descubre cuál es.</p>
+      <p>Escucha con atención y reconoce la letra.</p>
 
-      <div class="listen-controls">
-        <div class="listen-prompt">👂 Escucha con atención. ¿Qué letra oyes?</div>
-        <div class="listen-buttons">
-          <button class="listen-btn" id="hearLetter">🔊 Escuchar letra</button>
-          <button class="listen-btn" id="repeatLetter">↻ Repetir</button>
-          <button class="listen-btn" id="showAnswer">👀 Ver respuesta</button>
-          <button class="listen-btn" id="nextLetter">➡️ Otra letra</button>
+      <div class="listen-game">
+        <div class="listen-top">
+          <span>🎯 Reto auditivo</span>
+          <span class="listen-score" id="listenScore">Aciertos: 0 / 0</span>
         </div>
-        <div class="listen-answer" id="listenAnswer">Primero escucha. No mires la respuesta todavía.</div>
+        <button class="sound-button" id="hearLetter" aria-label="Escuchar letra">🔊</button>
+        <div class="listen-hint">Presiona el altavoz. Puedes escucharlo todas las veces que necesites.</div>
+        <div class="answer-options" id="answerOptions"></div>
+        <div class="listen-feedback" id="listenFeedback">¿Qué letra escuchaste?</div>
+        <button class="next-listen" id="nextLetter">Siguiente letra →</button>
       </div>
     </div>
 
@@ -430,25 +472,54 @@
       symbol: letter.textContent.trim(),
       name: letter.dataset.name
     }));
-    let listeningLetter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
+    let listeningLetter;
+    let listenAttempts = 0;
+    let listenCorrect = 0;
+    let answered = false;
 
-    function playListeningLetter() {
-      speakLetter(listeningLetter.name);
+    function shuffled(items) {
+      return [...items].sort(() => Math.random() - 0.5);
     }
 
-    document.getElementById('hearLetter').addEventListener('click', playListeningLetter);
-    document.getElementById('repeatLetter').addEventListener('click', playListeningLetter);
-    document.getElementById('showAnswer').addEventListener('click', () => {
-      document.getElementById('listenAnswer').innerHTML = 'La respuesta es <b>' + listeningLetter.symbol + '</b> — ' + listeningLetter.name + '. ¡Repítela en voz alta!';
-    });
-    document.getElementById('nextLetter').addEventListener('click', () => {
-      const current = listeningLetter.symbol;
-      do {
-        listeningLetter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
-      } while (alphabetData.length > 1 && listeningLetter.symbol === current);
-      document.getElementById('listenAnswer').textContent = 'Nueva letra lista. Escucha con atención.';
-      playListeningLetter();
-    });
+    function newListeningRound(autoPlay = false) {
+      answered = false;
+      listeningLetter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
+      const distractors = shuffled(alphabetData.filter(item => item.symbol !== listeningLetter.symbol)).slice(0, 2);
+      const options = shuffled([listeningLetter, ...distractors]);
+      const box = document.getElementById('answerOptions');
+      box.innerHTML = '';
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.className = 'answer-option';
+        button.textContent = option.symbol;
+        button.addEventListener('click', () => checkListeningAnswer(option, button));
+        box.appendChild(button);
+      });
+      document.getElementById('listenFeedback').textContent = '¿Qué letra escuchaste?';
+      document.getElementById('nextLetter').style.display = 'none';
+      if (autoPlay) speakLetter(listeningLetter.name);
+    }
+
+    function checkListeningAnswer(option, button) {
+      if (answered) return;
+      if (option.symbol === listeningLetter.symbol) {
+        answered = true;
+        listenAttempts++;
+        listenCorrect++;
+        button.classList.add('correct');
+        document.getElementById('listenFeedback').innerHTML = '¡Excelente! Era <b>' + listeningLetter.symbol + '</b> — ' + listeningLetter.name + '. Repítela en voz alta.';
+        document.getElementById('listenScore').textContent = 'Aciertos: ' + listenCorrect + ' / ' + listenAttempts;
+        document.getElementById('nextLetter').style.display = 'block';
+      } else {
+        button.classList.add('wrong');
+        document.getElementById('listenFeedback').textContent = 'Casi. Escucha otra vez e inténtalo de nuevo.';
+        speakLetter(listeningLetter.name);
+      }
+    }
+
+    document.getElementById('hearLetter').addEventListener('click', () => speakLetter(listeningLetter.name));
+    document.getElementById('nextLetter').addEventListener('click', () => newListeningRound(true));
+    newListeningRound(false);
 
     letters.forEach(letter => {
       letter.addEventListener('click', () => showLetter(letter));
