@@ -121,7 +121,9 @@ function showModal(title,text){document.getElementById('modalTitle').textContent
 function closeModal(){document.getElementById('modal').classList.remove('show')}
 function whySpanish(){showModal('¿Por qué español?','Porque aprender otro idioma te abre puertas, te conecta con otras personas y culturas, y te da una nueva manera de ver el mundo. Un pasito a la vez.')}
 function openUnit(id){
- const names={'unit-objetos':'Los objetos de la clase','unit-alfabeto':'El alfabeto','unit-numeros':'Los números','unit-saludos':'Saludos y conversaciones','unit-gustos':'¿Qué te gusta hacer?','unit-quien':'¿Quién soy yo?','unit-estudiantes':'Somos estudiantes','unit-escuela':'En la escuela','unit-comida':'Mi comida favorita','unit-familia':'En mi familia','unit-compras':'¡Vamos de compras!'};
+ if(id==='unit-objetos'){window.location.href='units/objetos.html';return;}
+ if(id==='unit-alfabeto'){window.location.href='units/alfabeto.html';return;}
+ const names={'unit-numeros':'Los números','unit-saludos':'Saludos y conversaciones','unit-gustos':'¿Qué te gusta hacer?','unit-quien':'¿Quién soy yo?','unit-estudiantes':'Somos estudiantes','unit-escuela':'En la escuela','unit-comida':'Mi comida favorita','unit-familia':'En mi familia','unit-compras':'¡Vamos de compras!'};
  showModal(names[id]||'Unidad','Esta unidad ya tiene su espacio. La iremos llenando con actividades interactivas conforme avancemos en clase.')
 }
 </script>
