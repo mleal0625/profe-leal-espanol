@@ -105,6 +105,7 @@
 
 .alphabet-preview span {
   background: white;
+  cursor: pointer;
   color: #17324d;
   border: 2px solid #8ed8f8;
   border-radius: 14px;
@@ -115,8 +116,10 @@
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.alphabet-preview span:hover {
+.alphabet-preview span:hover,
+.alphabet-preview span:focus {
   transform: translateY(-4px) scale(1.06);
+  outline: none;
   box-shadow: 0 8px 14px rgba(0,0,0,.12);
 }
 
@@ -148,6 +151,33 @@
   font-size: 30px;
   font-weight: bold;
   letter-spacing: 8px;
+}
+
+.letter-guide {
+  max-width: 850px;
+  margin: 22px auto 0;
+  background: white;
+  border: 2px solid #8ed8f8;
+  border-radius: 18px;
+  padding: 20px;
+  color: #17324d;
+  min-height: 95px;
+}
+
+.letter-guide .big-letter {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ff6b1a;
+  margin-right: 10px;
+}
+
+.letter-guide strong {
+  font-size: 21px;
+}
+
+.letter-guide p {
+  margin: 8px 0 0;
+  color: #40566c;
 }
 
 .ene-note {
@@ -219,34 +249,39 @@
   <h2>Aprende</h2>
   <p>Descubre las 27 letras del alfabeto español.</p>
 
-  <div class="alphabet-preview">
-    <span>A</span>
-    <span>B</span>
-    <span>C</span>
-    <span>D</span>
-    <span>E</span>
-    <span>F</span>
-    <span>G</span>
-    <span>H</span>
-    <span>I</span>
-    <span>J</span>
-    <span>K</span>
-    <span>L</span>
-    <span>M</span>
-    <span>N</span>
-     <span class="special-letter">Ñ</span>
-    <span>O</span>
-    <span>P</span>
-    <span>Q</span>
-    <span>R</span>
-    <span>S</span>
-    <span>T</span>
-    <span>U</span>
-    <span>V</span>
-    <span>W</span>
-    <span>X</span>
-    <span>Y</span>
-    <span>Z</span>
+  <div class="alphabet-preview" aria-label="Alfabeto español interactivo">
+    <span tabindex="0" data-name="a" data-example="avión">A</span>
+    <span tabindex="0" data-name="be" data-example="bebé">B</span>
+    <span tabindex="0" data-name="ce" data-example="casa">C</span>
+    <span tabindex="0" data-name="de" data-example="dedo">D</span>
+    <span tabindex="0" data-name="e" data-example="elefante">E</span>
+    <span tabindex="0" data-name="efe" data-example="familia">F</span>
+    <span tabindex="0" data-name="ge" data-example="gato">G</span>
+    <span tabindex="0" data-name="hache" data-example="hola">H</span>
+    <span tabindex="0" data-name="i" data-example="isla">I</span>
+    <span tabindex="0" data-name="jota" data-example="jugo">J</span>
+    <span tabindex="0" data-name="ka" data-example="kilo">K</span>
+    <span tabindex="0" data-name="ele" data-example="lápiz">L</span>
+    <span tabindex="0" data-name="eme" data-example="mamá">M</span>
+    <span tabindex="0" data-name="ene" data-example="nube">N</span>
+    <span tabindex="0" class="special-letter" data-name="eñe" data-example="niño">Ñ</span>
+    <span tabindex="0" data-name="o" data-example="oso">O</span>
+    <span tabindex="0" data-name="pe" data-example="papá">P</span>
+    <span tabindex="0" data-name="cu" data-example="queso">Q</span>
+    <span tabindex="0" data-name="erre" data-example="rosa">R</span>
+    <span tabindex="0" data-name="ese" data-example="sol">S</span>
+    <span tabindex="0" data-name="te" data-example="taco">T</span>
+    <span tabindex="0" data-name="u" data-example="uva">U</span>
+    <span tabindex="0" data-name="uve" data-example="vaca">V</span>
+    <span tabindex="0" data-name="uve doble" data-example="wifi">W</span>
+    <span tabindex="0" data-name="equis" data-example="xilófono">X</span>
+    <span tabindex="0" data-name="ye" data-example="yo">Y</span>
+    <span tabindex="0" data-name="zeta" data-example="zapato">Z</span>
+  </div>
+
+  <div class="letter-guide" id="letterGuide" aria-live="polite">
+    <span class="big-letter">A</span><strong>A — a</strong>
+    <p>A de <b>avión</b>. Toca una letra para aprender su nombre y ver un ejemplo.</p>
   </div>
 
   <div class="vowels-preview">
@@ -288,6 +323,28 @@
     </div>
 
   </main>
+
+  <script>
+    const letters = document.querySelectorAll('.alphabet-preview span');
+    const guide = document.getElementById('letterGuide');
+
+    function showLetter(letter) {
+      const symbol = letter.textContent.trim();
+      const name = letter.dataset.name;
+      const example = letter.dataset.example;
+      guide.innerHTML = '<span class="big-letter">' + symbol + '</span><strong>' + symbol + ' — ' + name + '</strong><p>' + symbol + ' de <b>' + example + '</b>. Repite: <b>' + name + '</b>.</p>';
+    }
+
+    letters.forEach(letter => {
+      letter.addEventListener('click', () => showLetter(letter));
+      letter.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          showLetter(letter);
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
