@@ -153,6 +153,57 @@
   letter-spacing: 8px;
 }
 
+.listen-station {
+  grid-column: 1 / -1;
+}
+
+.listen-controls {
+  max-width: 720px;
+  margin: 22px auto 0;
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.listen-prompt {
+  font-size: 18px;
+  color: #17324d;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.listen-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.listen-btn {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ffcf45;
+  color: #17324d;
+  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+}
+
+.listen-btn:hover,
+.listen-btn:focus {
+  transform: translateY(-2px);
+  outline: 3px solid rgba(255,107,26,.2);
+}
+
+.listen-answer {
+  margin-top: 18px;
+  min-height: 28px;
+  font-weight: bold;
+  color: #17324d;
+}
+
 .letter-guide {
   max-width: 850px;
   margin: 22px auto 0;
@@ -292,10 +343,21 @@
   <p class="ene-note">⭐ ¡No olvides la letra especial del español: Ñ!</p>
 </div> 
 
-    <div class="station">
+    <div class="station listen-station">
       <div class="icon">🎧</div>
       <h2>Escucha</h2>
-      <p>Escucha y repite</p>
+      <p>Escucha una letra, repítela y después descubre cuál es.</p>
+
+      <div class="listen-controls">
+        <div class="listen-prompt">👂 Escucha con atención. ¿Qué letra oyes?</div>
+        <div class="listen-buttons">
+          <button class="listen-btn" id="hearLetter">🔊 Escuchar letra</button>
+          <button class="listen-btn" id="repeatLetter">↻ Repetir</button>
+          <button class="listen-btn" id="showAnswer">👀 Ver respuesta</button>
+          <button class="listen-btn" id="nextLetter">➡️ Otra letra</button>
+        </div>
+        <div class="listen-answer" id="listenAnswer">Primero escucha. No mires la respuesta todavía.</div>
+      </div>
     </div>
 
     <div class="station">
@@ -363,6 +425,30 @@
       guide.innerHTML = '<span class="big-letter">' + symbol + '</span><strong>' + symbol + ' — ' + name + '</strong><p>' + symbol + ' de <b>' + example + '</b>. Repite: <b>' + name + '</b>.</p>';
       speakLetter(name);
     }
+
+    const alphabetData = Array.from(letters).map(letter => ({
+      symbol: letter.textContent.trim(),
+      name: letter.dataset.name
+    }));
+    let listeningLetter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
+
+    function playListeningLetter() {
+      speakLetter(listeningLetter.name);
+    }
+
+    document.getElementById('hearLetter').addEventListener('click', playListeningLetter);
+    document.getElementById('repeatLetter').addEventListener('click', playListeningLetter);
+    document.getElementById('showAnswer').addEventListener('click', () => {
+      document.getElementById('listenAnswer').innerHTML = 'La respuesta es <b>' + listeningLetter.symbol + '</b> — ' + listeningLetter.name + '. ¡Repítela en voz alta!';
+    });
+    document.getElementById('nextLetter').addEventListener('click', () => {
+      const current = listeningLetter.symbol;
+      do {
+        listeningLetter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
+      } while (alphabetData.length > 1 && listeningLetter.symbol === current);
+      document.getElementById('listenAnswer').textContent = 'Nueva letra lista. Escucha con atención.';
+      playListeningLetter();
+    });
 
     letters.forEach(letter => {
       letter.addEventListener('click', () => showLetter(letter));
